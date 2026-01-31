@@ -16,6 +16,7 @@ defmodule Tunez.Music.Artist do
 
     read :read do
       primary? true
+      pagination keyset?: true, required?: false
     end
 
     update :update do
