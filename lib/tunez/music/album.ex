@@ -32,7 +32,7 @@ defmodule Tunez.Music.Album do
 
     validate match(
                :cover_image_url,
-               ~r"(https://|/images/).+(\.png/\.jpg)$"
+               ~r"^(https://|/images/).+(\.png|\.jpg)$"
              ),
              where: [changing(:cover_image_url)],
              message: "must start with https:// or /images/"
@@ -59,6 +59,11 @@ defmodule Tunez.Music.Album do
     belongs_to :artist, Tunez.Music.Artist do
       allow_nil? false
     end
+  end
+
+  identities do
+    identity :unique_album_names_per_artist, [:name, :artist_id],
+      message: "already exists for this artist"
   end
 
   def next_year, do: Date.utc_today().year + 1
