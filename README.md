@@ -25,14 +25,14 @@ A music database application built with the Ash Framework and Phoenix LiveView. 
 
 Checklist of the progress based on the book's chapters:
 
-- [ ] ** Chapter 1: Building Our First Resource**
+- [x] ** Chapter 1: Building Our First Resource**
   - Set up the Ashify starter app.
   - Install and configure Ash.
   - Get familiar with CRUD actions.
   - Build a full resource with attributes, actions, and a database table.
   - Integrate actions into the web UI using forms and code interfaces.
 
-- [ ] **🔗 Chapter 2: Extending Resources with Business Logic**
+- [x] **🔗 Chapter 2: Extending Resources with Business Logic**
   - Create a second resource and link resources with relationships.
   - Cover advanced features like preparations, validations, identities, and changes.
 
