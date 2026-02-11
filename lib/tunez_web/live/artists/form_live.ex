@@ -74,7 +74,7 @@ defmodule TunezWeb.Artists.FormLive do
           |> put_flash(:error, "could not save artist data")
           |> assign(:form, form)
 
-        {:noreplay, socket}
+        {:noreply, socket}
     end
   end
 end
