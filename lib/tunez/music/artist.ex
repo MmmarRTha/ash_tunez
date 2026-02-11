@@ -11,16 +11,20 @@ defmodule Tunez.Music.Artist do
   end
 
   actions do
-    # defaults [:create, :read, :update, :destroy]
-    # default_accept [:name, :biography]
+    defaults [:read]
+
+    read :search do
+      argument :query, :ci_string do
+        constraints allow_empty?: true
+        default ""
+      end
+
+      filter expr(contains(name, ^arg(:query)))
+      pagination offset?: true, default_limit: 12
+    end
 
     create :create do
       accept [:name, :biography]
-    end
-
-    read :read do
-      primary? true
-      pagination keyset?: true, required?: false
     end
 
     update :update do
@@ -31,16 +35,6 @@ defmodule Tunez.Music.Artist do
     end
 
     destroy :destroy do
-    end
-
-    read :search do
-      argument :query, :ci_string do
-        constraints allow_empty?: true
-        default ""
-      end
-
-      filter expr(contains(name, ^arg(:query)))
-      pagination offset?: true, default_limit: 12
     end
   end
 

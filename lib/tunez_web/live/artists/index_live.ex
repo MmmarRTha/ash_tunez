@@ -14,20 +14,19 @@ defmodule TunezWeb.Artists.IndexLive do
   def handle_params(params, _url, socket) do
     sort_by = Map.get(params, "sort_by") |> validate_sort_by()
     query_text = Map.get(params, "q", "")
+    page_params = AshPhoenix.LiveView.params_to_page_opts(params, default_limit: 12)
 
-    artists =
+    page =
       Tunez.Music.search_artists!(query_text,
+        page: page_params,
         query: [sort_input: sort_by]
       )
-
-    page = Tunez.Music.search_artists!(query_text, query: [sort_input: sort_by])
 
     socket =
       socket
       |> assign(:sort_by, sort_by)
       |> assign(:query_text, query_text)
       |> assign(:page, page)
-      |> assign(:artists, artists)
 
     {:noreply, socket}
   end
@@ -58,7 +57,7 @@ defmodule TunezWeb.Artists.IndexLive do
           <.artist_card artist={artist} />
         </li>
       </ul>
-      <:pagination_links page={@page} query_text={@query_text} sort_by={@sort_by} />
+      <.pagination_links page={@page} query_text={@query_text} sort_by={@sort_by} />
     </Layouts.app>
     """
   end
@@ -111,12 +110,17 @@ defmodule TunezWeb.Artists.IndexLive do
     """
   end
 
+  attr :page, :any, required: true
+  attr :query_text, :string, required: true
+  attr :sort_by, :string, required: true
+
   def pagination_links(assigns) do
     ~H"""
     <div
-      if:{AshPhoenix.LiveView.prev_page?(@page)
-      ||
-      AshPhoenix.LiveView.next_page?(@page)}
+      if={
+        AshPhoenix.LiveView.prev_page?(@page) ||
+          AshPhoenix.LiveView.next_page?(@page)
+      }
       class="flex justify-center pt-8 space-x-4"
     >
       <.button_link
