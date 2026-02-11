@@ -36,7 +36,7 @@ Checklist of the progress based on the book's chapters:
   - Create a second resource and link resources with relationships.
   - Cover advanced features like preparations, validations, identities, and changes.
 
-- [ ] **🔍 Chapter 3: Creating a Better Search UI**
+- [x] **🔍 Chapter 3: Creating a Better Search UI**
   - Implement features for searching, sorting, and pagination.
   - Derive new attributes with calculations and aggregates.
 
