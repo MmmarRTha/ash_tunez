@@ -41,10 +41,12 @@ defmodule Tunez.Music.Artist do
     end
 
     create :create do
+      description "Create a new artist."
       accept [:name, :biography]
     end
 
     update :update do
+      description "Update an existing artist."
       require_atomic? false
       accept [:name, :biography]
 
@@ -52,6 +54,7 @@ defmodule Tunez.Music.Artist do
     end
 
     destroy :destroy do
+      description "Delete an existing artist."
     end
   end
 

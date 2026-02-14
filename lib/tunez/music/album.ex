@@ -18,14 +18,20 @@ defmodule Tunez.Music.Album do
     end
   end
 
+  resource do
+    description "A collection of songs released by an artist."
+  end
+
   actions do
     defaults [:read, :destroy]
 
     create :create do
+      description "Create a new album."
       accept [:name, :year_released, :cover_image_url, :artist_id]
     end
 
     update :update do
+      description "Update an existing album."
       accept [:name, :year_released, :cover_image_url]
     end
   end
