@@ -1,5 +1,27 @@
 defmodule Tunez.Music.Artist do
-  use Ash.Resource, otp_app: :tunez, domain: Tunez.Music, data_layer: AshPostgres.DataLayer
+  use Ash.Resource,
+    otp_app: :tunez,
+    domain: Tunez.Music,
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshGraphql.Resource, AshJsonApi.Resource]
+
+  graphql do
+    type :artist
+
+    filterable_fields [
+      :album_count,
+      :cover_image_url,
+      :latest_album_year_released,
+      :inserted_at,
+      :updated_at
+    ]
+  end
+
+  json_api do
+    type "artist"
+    includes [:albums]
+    derive_filter? false
+  end
 
   postgres do
     table "artists"
@@ -10,11 +32,18 @@ defmodule Tunez.Music.Artist do
     end
   end
 
+  resource do
+    description "A person or group of people that makes and releases music."
+  end
+
   actions do
     defaults [:read]
 
     read :search do
+      description "List Artists, optionally filtering by name."
+
       argument :query, :ci_string do
+        description "Return only artists with names including the given value."
         constraints allow_empty?: true
         default ""
       end
@@ -24,10 +53,12 @@ defmodule Tunez.Music.Artist do
     end
 
     create :create do
+      description "Create a new artist."
       accept [:name, :biography]
     end
 
     update :update do
+      description "Update an existing artist."
       require_atomic? false
       accept [:name, :biography]
 
@@ -35,6 +66,7 @@ defmodule Tunez.Music.Artist do
     end
 
     destroy :destroy do
+      description "Delete an existing artist."
     end
   end
 
@@ -46,10 +78,13 @@ defmodule Tunez.Music.Artist do
       public? true
     end
 
-    attribute :biography, :string
+    attribute :biography, :string do
+      public? true
+    end
 
     attribute :previous_names, {:array, :string} do
       default []
+      public? true
     end
 
     create_timestamp :inserted_at, public?: true
@@ -59,6 +94,7 @@ defmodule Tunez.Music.Artist do
   relationships do
     has_many :albums, Tunez.Music.Album do
       sort year_released: :desc
+      public? true
     end
   end
 
