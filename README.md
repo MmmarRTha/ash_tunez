@@ -40,10 +40,10 @@ Checklist of the progress based on the book's chapters:
   - Implement features for searching, sorting, and pagination.
   - Derive new attributes with calculations and aggregates.
 
-- [ ] **🔌 Chapter 4: Generating APIs Without Writing Code**
+- [x] **🔌 Chapter 4: Generating APIs Without Writing Code**
   - Create full REST JSON and GraphQL APIs from existing resources.
 
-- [ ] **🔐 Chapter 5: Authentication: Who Are You?**
+- [x] **🔐 Chapter 5: Authentication: Who Are You?**
   - Set up authentication using AshAuthentication (username/password, magic link).
   - Customize auto-generated liveviews.
 
