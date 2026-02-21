@@ -274,6 +274,10 @@ defmodule Tunez.Accounts.User do
 
       run AshAuthentication.Strategy.MagicLink.Request
     end
+
+    update :set_role do
+      accept [:role]
+    end
   end
 
   policies do
