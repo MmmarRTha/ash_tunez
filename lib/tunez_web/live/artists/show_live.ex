@@ -176,7 +176,7 @@ defmodule TunezWeb.Artists.ShowLive do
   end
 
   def handle_event("destroy-album", %{"id" => album_id}, socket) do
-    case Tunez.Music.destroy_album(album_id) do
+    case Tunez.Music.destroy_album(album_id, actor: socket.assigns.current_user) do
       :ok ->
         socket =
           socket
