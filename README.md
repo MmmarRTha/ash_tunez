@@ -47,7 +47,7 @@ Checklist of the progress based on the book's chapters:
   - Set up authentication using AshAuthentication (username/password, magic link).
   - Customize auto-generated liveviews.
 
-- [ ] ** Chapter 6: Authorization: What Can You Do?**
+- [x] ** Chapter 6: Authorization: What Can You Do?**
   - Introduce authorization using policies and bypasses.
   - Define a policy once and use it throughout the app.
 
