@@ -40,6 +40,11 @@ defmodule Tunez.Music.Album do
     end
   end
 
+  changes do
+    change relate_actor(:created_by, allow_nil?: true), on: [:create]
+    change relate_actor(:updated_by, allow_nil?: true)
+  end
+
   validations do
     validate numericality(:year_released,
                greater_than: 1950,
@@ -83,6 +88,9 @@ defmodule Tunez.Music.Album do
     belongs_to :artist, Tunez.Music.Artist do
       allow_nil? false
     end
+
+    belongs_to :created_by, Tunez.Accounts.User
+    belongs_to :updated_by, Tunez.Accounts.User
   end
 
   identities do
