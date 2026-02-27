@@ -51,7 +51,7 @@ Checklist of the progress based on the book's chapters:
   - Introduce authorization using policies and bypasses.
   - Define a policy once and use it throughout the app.
 
-- [ ] **🧪 Chapter 7: Testing Your Application**
+- [x] **🧪 Chapter 7: Testing Your Application**
   - Cover testing strategies for Ash and LiveView apps.
   - Use tools provided by Ash for testing.
 
