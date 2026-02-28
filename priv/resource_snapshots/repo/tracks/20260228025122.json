@@ -83,7 +83,7 @@
         "destination_attribute": "id",
         "destination_attribute_default": null,
         "destination_attribute_generated": null,
-        "index?": false,
+        "index?": true,
         "match_type": null,
         "match_with": null,
         "multitenancy": {
@@ -91,8 +91,8 @@
           "global": null,
           "strategy": null
         },
-        "name": "tracks_albums_id_fkey",
-        "on_delete": null,
+        "name": "tracks_album_id_fkey",
+        "on_delete": "delete",
         "on_update": null,
         "primary_key?": true,
         "schema": "public",
@@ -100,7 +100,7 @@
       },
       "scale": null,
       "size": null,
-      "source": "albums_id",
+      "source": "album_id",
       "type": "uuid"
     }
   ],
@@ -108,8 +108,8 @@
   "check_constraints": [],
   "custom_indexes": [],
   "custom_statements": [],
-  "has_create_action": false,
-  "hash": "F45E7911B328188B644EDCA08E0650056F146FC56389DEF44028996CD93AE4F8",
+  "has_create_action": true,
+  "hash": "5076B4D01A6FC59C74206BD8300111506C6110D00A440EE0711272A365E3F7D2",
   "identities": [],
   "multitenancy": {
     "attribute": null,

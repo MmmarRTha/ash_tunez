@@ -22,19 +22,23 @@ defmodule Tunez.Repo.Migrations.AddAlbumTracks do
         null: false,
         default: fragment("(now() AT TIME ZONE 'utc')")
 
-      add :albums_id,
+      add :album_id,
           references(:albums,
             column: :id,
-            name: "tracks_albums_id_fkey",
+            name: "tracks_album_id_fkey",
             type: :uuid,
-            prefix: "public"
-          ),
-          null: false
+            prefix: "public",
+            on_delete: :delete_all
+          ), null: false
     end
+
+    create index(:tracks, [:album_id])
   end
 
   def down do
-    drop constraint(:tracks, "tracks_albums_id_fkey")
+    drop_if_exists index(:tracks, [:album_id])
+
+    drop constraint(:tracks, "tracks_album_id_fkey")
 
     drop table(:tracks)
   end
