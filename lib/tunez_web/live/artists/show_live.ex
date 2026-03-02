@@ -96,7 +96,7 @@ defmodule TunezWeb.Artists.ShowLive do
             </.button_link>
           </:action>
         </.header>
-        <.track_details tracks={[]} />
+        <.track_details tracks={@album.tracks} />
       </div>
     </div>
     """
