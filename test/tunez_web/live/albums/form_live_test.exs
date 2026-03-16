@@ -48,7 +48,7 @@ defmodule TunezWeb.Albums.FormLiveTest do
       |> fill_in("tr[data-id='2'] input", "Duration", with: "4:44")
       |> click_link("tr[data-id='2'] a", "Delete")
       |> click_button("Save")
-      |> assert_has(flash(:info), text: "Album saved successfully")
+      |> assert_has(flash(:info), text: "album saved successfully")
 
       album = get_by_name!(Tunez.Music.Album, "Sample With Tracks", load: [:tracks])
       assert ["First Track", "Second Track"] == Enum.map(album.tracks, & &1.name)
