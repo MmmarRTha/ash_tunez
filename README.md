@@ -55,7 +55,7 @@ Checklist of the progress based on the book's chapters:
   - Cover testing strategies for Ash and LiveView apps.
   - Use tools provided by Ash for testing.
 
-- [ ] **🧩 Chapter 8: Having Fun With Nested Forms**
+- [x] **🧩 Chapter 8: Having Fun With Nested Forms**
   - Expand the domain model and build a nested form with drag and drop re-ordering.
 
 - [ ] **❤️ Chapter 9: Following Your Favorite Artists**
