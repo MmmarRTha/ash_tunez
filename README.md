@@ -58,7 +58,7 @@ Checklist of the progress based on the book's chapters:
 - [x] **🧩 Chapter 8: Having Fun With Nested Forms**
   - Expand the domain model and build a nested form with drag and drop re-ordering.
 
-- [ ] **❤️ Chapter 9: Following Your Favorite Artists**
+- [x] **❤️ Chapter 9: Following Your Favorite Artists**
   - Explore many-to-many relationships for users to follow artists.
   - Improve code interfaces for following and unfollowing.
 
