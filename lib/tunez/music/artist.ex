@@ -60,13 +60,19 @@ defmodule Tunez.Music.Artist do
 
     update :update do
       description "Update an existing artist."
-      require_atomic? false
       accept [:name, :biography]
 
-      change Tunez.Music.Changes.UpdatePreviousNames, where: [changing(:name)]
+      change Tunez.Music.Changes.UpdatePreviousNames
     end
 
     destroy :destroy do
+      primary? true
+
+      change cascade_destroy(:albums,
+               return_notifications?: true,
+               after_action?: false
+             )
+
       description "Delete an existing artist."
     end
   end

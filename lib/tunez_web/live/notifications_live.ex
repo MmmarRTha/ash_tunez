@@ -68,8 +68,7 @@ defmodule TunezWeb.NotificationsLive do
     notification = Enum.find(socket.assigns.notifications, &(&1.id == id))
 
     Tunez.Accounts.dismiss_notification(notification, actor: socket.assigns.current_user)
-    notifications = Enum.reject(socket.assigns.notifications, &(&1.id == id))
-    {:noreply, assign(socket, notifications: notifications)}
+    {:noreply, socket}
   end
 
   def handle_info(%{topic: "notifications:" <> _}, socket) do
