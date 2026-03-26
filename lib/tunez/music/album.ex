@@ -20,7 +20,7 @@ defmodule Tunez.Music.Album do
     repo Tunez.Repo
 
     references do
-      reference :artist, index?: true, on_delete: :delete
+      reference :artist, index?: true
     end
   end
 
@@ -29,7 +29,7 @@ defmodule Tunez.Music.Album do
   end
 
   actions do
-    defaults [:read, :destroy]
+    defaults [:read]
 
     create :create do
       description "Create a new album."
@@ -44,6 +44,11 @@ defmodule Tunez.Music.Album do
       require_atomic? false
       argument :tracks, {:array, :map}
       change manage_relationship(:tracks, type: :direct_control, order_is_key: :order)
+    end
+
+    destroy :destroy do
+      primary? true
+      change cascade_destroy(:notifications, return_notifications?: true, after_action?: false)
     end
   end
 
@@ -61,13 +66,14 @@ defmodule Tunez.Music.Album do
     end
 
     policy action_type([:update, :destroy]) do
-      authorize_if expr(^actor(:role) == :editor and created_by_id == ^actor(:id))
+      authorize_if expr(can_manage_album?)
     end
   end
 
   changes do
     change relate_actor(:created_by, allow_nil?: true), on: [:create]
     change relate_actor(:updated_by, allow_nil?: true)
+    change Tunez.Accounts.Changes.SendNewAlbumNotifications, on: [:create]
   end
 
   validations do
@@ -121,10 +127,18 @@ defmodule Tunez.Music.Album do
 
     belongs_to :created_by, Tunez.Accounts.User
     belongs_to :updated_by, Tunez.Accounts.User
+    has_many :notifications, Tunez.Accounts.Notification
   end
 
   calculations do
     calculate :duration, :string, Tunez.Music.Calculations.SecondsToMinutes
+
+    calculate :can_manage_album?,
+              :boolean,
+              expr(
+                ^actor(:role) == :admin or
+                  (^actor(:role) == :editor and created_by_id == ^actor(:id))
+              )
   end
 
   aggregates do

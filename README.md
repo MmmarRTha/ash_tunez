@@ -62,7 +62,7 @@ Checklist of the progress based on the book's chapters:
   - Explore many-to-many relationships for users to follow artists.
   - Improve code interfaces for following and unfollowing.
 
-- [ ] **📣 Chapter 10: Delivering Real-Time Updates with PubSub**
+- [x] **📣 Chapter 10: Delivering Real-Time Updates with PubSub**
   - Build a user notification system with bulk actions and pubsub for real-time updates.
 
 ## 🚀 Getting Started

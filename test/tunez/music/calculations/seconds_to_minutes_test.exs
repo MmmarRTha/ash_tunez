@@ -1,7 +1,6 @@
 defmodule Tunez.Music.Calculations.SecondsToMinutesTest do
   use Tunez.DataCase, async: true
 
-  @tag skip: "Can be enabled during chapter 8."
   test "can convert seconds to minutes and seconds" do
     [{144, "2:24"}, {215, "3:35"}, {600, "10:00"}, {22, "0:22"}, {5421, "90:21"}]
     |> Enum.each(fn {seconds, minutes} ->
