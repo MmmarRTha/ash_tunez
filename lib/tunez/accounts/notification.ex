@@ -3,7 +3,8 @@ defmodule Tunez.Accounts.Notification do
     otp_app: :tunez,
     domain: Tunez.Accounts,
     data_layer: AshPostgres.DataLayer,
-    authorizers: [Ash.Policy.Authorizer]
+    authorizers: [Ash.Policy.Authorizer],
+    notifiers: [Ash.Notifier.PubSub]
 
   postgres do
     table "notifications"
@@ -16,7 +17,7 @@ defmodule Tunez.Accounts.Notification do
   end
 
   actions do
-    defaults [:destroy]
+    defaults [:read, :destroy]
 
     read :for_user do
       prepare build(load: [album: [:artist]], sort: [inserted_at: :desc])
@@ -40,6 +41,17 @@ defmodule Tunez.Accounts.Notification do
     policy action(:destroy) do
       authorize_if relates_to_actor_via(:user)
     end
+  end
+
+  pub_sub do
+    prefix "notifications"
+    module TunezWeb.Endpoint
+
+    transform fn notification ->
+      Map.take(notification.data, [:id, :user_id, :album_id])
+    end
+
+    publish :create, [:user_id]
   end
 
   attributes do
