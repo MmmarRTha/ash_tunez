@@ -3,8 +3,8 @@ config :ash, policies: [show_policy_breakdowns?: true]
 
 # Configure your database
 config :tunez, Tunez.Repo,
-  username: "martha_pop",
-  password: "postgres_pop",
+  username: "backend_mn",
+  password: "fedoradb",
   hostname: "localhost",
   database: "tunez_dev",
   stacktrace: true,
